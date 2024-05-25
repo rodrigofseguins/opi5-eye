@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  ansible:
+    build: .
+    volumes:
+      - .:/app
+    environment:
+      - GIT_REPO_URL=${GIT_REPO_URL}
+      - GIT_BRANCH=${GIT_BRANCH}
+      - CONTAINER_PATH=${CONTAINER_PATH}
+    tty: true
+    networks:
+      - pinet
+networks:
+  pinet:
+    external: true
