@@ -6,8 +6,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Acessar as variáveis de ambiente
-git_repo_url = os.getenv('GIT_REPO_URL')
-git_branch = os.getenv('GIT_BRANCH')
+git_repos = os.getenv('GIT_REPOS').split(',')
+git_branches = os.getenv('GIT_BRANCHES').split(',')
 container_paths = os.getenv('CONTAINER_PATHS').split(',')
 
 # Função para executar comandos no shell
@@ -18,7 +18,7 @@ def run_shell_command(command):
     return result.stdout
 
 # Processar cada container path
-for container_path in container_paths:
+for repo, branch, container_path in zip(git_repos, git_branches, container_paths):
     print(f"Processando: {container_path}")
 
     # Verificar status do git
@@ -32,6 +32,6 @@ for container_path in container_paths:
     run_shell_command(f'cd {container_path} && git commit -m "{commit_message}"')
 
     # Enviar para o repositório remoto
-    run_shell_command(f"cd {container_path} && git push {git_repo_url} {git_branch}")
+    run_shell_command(f"cd {container_path} && git push {repo} {branch}")
 
 print("Mudanças comitadas e enviadas com sucesso!")

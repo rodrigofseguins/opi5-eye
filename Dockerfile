@@ -13,7 +13,8 @@ RUN pip install ansible
 # Definir o diretório de trabalho no container
 WORKDIR /app
 
-# Copiar o conteúdo do diretório local para o diretório de trabalho no container
+# Copiar o arquivo requirements.txt e o restante do conteúdo do diretório local para o diretório de trabalho no container
+COPY requirements.txt ./
 COPY . .
 
 # Instalar as dependências do projeto

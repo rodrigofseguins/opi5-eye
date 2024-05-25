@@ -1,16 +1,17 @@
 services:
   ansible:
     build: .
-    container_name: ansible
+    container_name: opi5-eye  # Nome personalizado do container
     volumes:
       - .:/app
     environment:
-      - GIT_REPO_URL=${GIT_REPO_URL}
-      - GIT_BRANCH=${GIT_BRANCH}
-      - CONTAINER_PATH=${CONTAINER_PATH}
+      - GIT_REPOS=${GIT_REPOS}
+      - GIT_BRANCHES=${GIT_BRANCHES}
+      - CONTAINER_PATHS=${CONTAINER_PATHS}
     tty: true
     networks:
       - pinet
+
 networks:
   pinet:
     external: true

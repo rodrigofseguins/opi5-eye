@@ -1,3 +1,3 @@
-git_repo_url: "git@github.com:usuario/repositorio.git"
-git_branch: "main"
+git_repos: "git@github.com:usuario/repo1.git,git@github.com:usuario/repo2.git,git@github.com:usuario/repo3.git"
+git_branches: "main,main,main"
 container_paths: "/root/containers/container1,/root/containers/container2,/root/containers/container3"
