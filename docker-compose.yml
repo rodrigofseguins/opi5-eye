@@ -1,6 +1,7 @@
 services:
   ansible:
     build: .
+    container_name: ansible
     volumes:
       - .:/app
     environment:

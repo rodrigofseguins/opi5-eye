@@ -1,0 +1,23 @@
+---
+- name: Deploy opi5-eye
+  hosts: remote
+  tasks:
+    - name: Ensure Python virtual environment is present
+      ansible.builtin.command:
+        cmd: python3 -m venv /app/venv
+      args:
+        creates: /app/venv/bin/activate
+
+    - name: Install required Python packages
+      ansible.builtin.pip:
+        requirements: /app/requirements.txt
+        virtualenv: /app/venv
+
+    - name: Create .env file from template
+      ansible.builtin.template:
+        src: templates/env.j2
+        dest: /app/.env
+
+    - name: Run Python script to commit and push changes
+      ansible.builtin.command:
+        cmd: /app/venv/bin/python /app/commit_and_push.py
